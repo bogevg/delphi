@@ -63,6 +63,7 @@ randomize;
       end;
     if eq then writeln('m1 = m3 !') else writeln('m1 <> m3 !');
     //Добавляем динамический массив
+    writeln('Теперь работаем с дин массивами'); readln;
     setlength(m4,1000);
     //m4:=m1; //syntax Error
     setlength(m5,1100);
