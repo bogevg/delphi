@@ -27,9 +27,9 @@ randomize;
   repeat
   writeln('Enter new string > ');
   readln(s1);
-  s2:=s1;
+  s2:=s1;     //copy
   writeln('Adress shortstrings: ',int32(@s1[1]),' ',int32(@s2[1]),#10,s2);
-  s4:=s1;
+  s4:=s1;    //copy
   for I := 1  to length(s1) do
    if s1[i]<>s4[i] then
    begin
@@ -39,7 +39,7 @@ randomize;
   //
   for i :=1 to 1000 do
     m1[i]:=random(256);
-  m2:=m1;
+  m2:=m1;        //copy
   writeln('Adress stat arrays: ',int32(@m1[1]),' ',int32(@m2[1]));
   eq:=true;
   for i:=1 to 1000 do
@@ -51,7 +51,7 @@ randomize;
       end;
     if eq then writeln('m1 = m2 !') else writeln('m1 <> m2 !');
     //
-    m3:=m1;
+    m3:=m1;         //copy
     writeln('Adress stat arrays: ',int32(@m1[1]),' ',int32(@m3[1]));
   eq:=true;
   for i:=1 to 1000 do
@@ -62,8 +62,22 @@ randomize;
       break;
       end;
     if eq then writeln('m1 = m3 !') else writeln('m1 <> m3 !');
+        with rec1 do
+      begin
+        i:=1;
+        j:=2;
+        c:='z';
+        s:='Hello, world';
+        ar[1]:=i; ar[2]:=j; ar[3]:=3;ar[4]:=4;
+      end;
+      rec2:=rec1;
+      writeln('Adress rec1,rec2=',uint32(@rec1),' ',uint32(@rec2));
+      writeln(rec2.s);
+      writeln('Size rec=',uint32(@rec2)-uint32(@rec1),'=',sizeof(rec1));
+    i := rec2.ar[3];
+    writeln('rec2.ar[3] ',i);
     //ƒобавл€ем динамический массив
-    writeln('“еперь работаем с дин массивами'); readln;
+    writeln('“еперь работаем с дин. структурами, массивами...'); readln;
     setlength(m4,1000);
     //m4:=m1; //syntax Error
     setlength(m5,1100);
@@ -93,17 +107,6 @@ for i:=0 to 9 do
 for i := 0 to 9 do
   for j:=0 to 9 do
     setlength(m6[i,j],20);// 3
-with rec1 do
-begin
-  i:=1;
-  j:=2;
-  c:='z';
-  s:='Hello, world';
-  ar[1]:=i; ar[2]:=j; ar[3]:=3;ar[4]:=4;
-end;
-rec2:=rec1;
-writeln('Adress rec1,rec2=',uint32(@rec1),' ',uint32(@rec2));
-writeln(rec2.s);
-writeln('Size rec=',uint32(@rec2)-uint32(@rec1),'=',sizeof(rec1));
+
   until false;
 end.
