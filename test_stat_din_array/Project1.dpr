@@ -12,7 +12,7 @@ var s1,s2 : shortstring;
     s5 :string;
     m1,m2 : tsa;
     m3 :tsa;
-    m4,m5 : array of byte;
+    m4,m5,m5_ : array of byte;
     m6 : array of array of array of byte;
     i, j, k : int32;
     eq:boolean;
@@ -80,14 +80,17 @@ randomize;
     writeln('“еперь работаем с дин. структурами, массивами...'); readln;
     setlength(m4,1000);
     //m4:=m1; //syntax Error
-    setlength(m5,1100);
     for i :=1 to 1000 do
       m4[i]:=random(256);
-  writeln('Adress din array (before copy): ',int32(@m4[1]),' ',int32(@m5[1]));
-    m5:=m4;
-  writeln('Adress din array (after copy): ',int32(@m4[1]),' ',int32(@m5[1]));
+  m5:=m4;
+  writeln('Adress din array m4,m5 (after copy): ',int32(@m4[1]),' ',int32(@m5[1]));
   m5[0]:=0;
   writeln('Adress din array (after m5[0]:=0): ',int32(@m4[1]),' ',int32(@m5[1]));
+  setlength(m5_,1000);
+  writeln('Adress din array m4, m5_ (before copy): ',int32(@m4[1]),' ',int32(@m5_[1]));
+  m5_:=m4;  // теперь указывают на одину и ту же область памчти
+  writeln('Adress din array m4, m5_ (after copy): ',int32(@m4[1]),' ',int32(@m5_[1]));
+  writeln('m5_[0]= ',m5_[0]);
   readln;
   eq:=true;
   for i:=1 to 1000 do
